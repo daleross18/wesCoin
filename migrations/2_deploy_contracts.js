@@ -1,5 +1,5 @@
-const DappToken = artifacts.require("./DappToken.sol");
+const wesCoin = artifacts.require("./wesCoin.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(DappToken);
+  deployer.deploy(wesCoin, 1000000);
 };
