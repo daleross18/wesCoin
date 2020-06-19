@@ -12,7 +12,16 @@ contract wesCoin {
       uint256 _value
    );
 
+   event Approval(
+      address indexed _owner,
+      address indexed _spender,
+      uint256 _value
+   );
+
    mapping(address => uint256) public balanceOf;
+   mapping(address => mapping(address => uint256)) public allowance;
+
+
 
    constructor (uint256 _initialSupply) public {
       balanceOf[msg.sender] = _initialSupply;
@@ -23,7 +32,7 @@ contract wesCoin {
    //transfer function
 
    function transfer (address _to, uint256 _value) public returns (bool success) {
-      require(balanceOf[msg.sender] >= _value, '');
+      require(balanceOf[msg.sender] >= _value, 'error message must contain revert');
       //transfer balance
       balanceOf[msg.sender] -= _value;
       balanceOf[_to] += _value;
@@ -33,6 +42,30 @@ contract wesCoin {
       return true;
       //trigger transfer event
 
+   }
+
+   // approve
+   function approve (address _spender,  uint256 _value) public returns (bool success) {
+      allowance[msg.sender][_spender] = _value;
+
+      emit Approval (msg.sender, _spender, _value);
+
+      return true;
+   }
+   // transfer from
+
+   function transferFrom (address _from, address _to, uint _value) public returns (bool success) {
+
+      require (_value <= balanceOf[_from], 'cannot transfer value larger than balance');
+      require (_value <= allowance[_from][msg.sender], 'cannot transfer value larger than approved amount');
+      
+      balanceOf[_from] -= _value;
+      balanceOf[_to] += _value;
+      allowance[_from][msg.sender] -= _value;
+
+      emit Transfer (_from, _to, _value);
+
+      return true;
    }
 
 }
