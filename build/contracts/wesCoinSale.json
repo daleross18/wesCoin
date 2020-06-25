@@ -1,0 +1,620 @@
+{
+  "contractName": "wesCoinSale",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "contract wesCoin",
+          "name": "_tokenContract",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "tokenContract",
+      "outputs": [
+        {
+          "internalType": "contract wesCoin",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract wesCoin\",\"name\":\"_tokenContract\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"constant\":true,\"inputs\":[],\"name\":\"tokenContract\",\"outputs\":[{\"internalType\":\"contract wesCoin\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/daleross18/wesCoin/token_sale/contracts/wesCoinSale.sol\":\"wesCoinSale\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/daleross18/wesCoin/token_sale/contracts/wesCoin.sol\":{\"keccak256\":\"0x50b0ee5bde355f450fc7a5de81ddae609c3555204716f20d21311161c725aa89\",\"urls\":[\"bzz-raw://284bb004dbc7e825b16052c9c0209c6f3f18be96b09afd35bf785d1c1a183ea0\",\"dweb:/ipfs/QmZHz2d2ZNwatxbRqEsL4PE5j9w6tpX85859sqSCqsEJg9\"]},\"/Users/daleross18/wesCoin/token_sale/contracts/wesCoinSale.sol\":{\"keccak256\":\"0x7fdb21c45f2f061633af4407e4aa349585c8cf772c43542dcf14ef38595f64d2\",\"urls\":[\"bzz-raw://9cb19c0312858227cb3bf7fadee7db7923110d057e8db4fe0c4fbb4010307023\",\"dweb:/ipfs/QmfBMfpnDCRw1HJHjwUhYUeCneqcRceZ5FiV5rYYWS9MFa\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506040516101a43803806101a48339818101604052602081101561003357600080fd5b8101908080519060200190929190505050336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555080600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505060d0806100d46000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c806355a373d614602d575b600080fd5b60336075565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff168156fea265627a7a7231582028e46ce3590dd34836370041c22cf636f147ae2550868347026644dfc783950c64736f6c63430005100032",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060285760003560e01c806355a373d614602d575b600080fd5b60336075565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff168156fea265627a7a7231582028e46ce3590dd34836370041c22cf636f147ae2550868347026644dfc783950c64736f6c63430005100032",
+  "sourceMap": "59:196:2:-;;;138:115;8:9:-1;5:2;;;30:1;27;20:12;5:2;138:115:2;;;;;;;;;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;138:115:2;;;;;;;;;;;;;;;;198:10;190:5;;:18;;;;;;;;;;;;;;;;;;232:14;216:13;;:30;;;;;;;;;;;;;;;;;;138:115;59:196;;;;;;",
+  "deployedSourceMap": "59:196:2:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;59:196:2;;;;;;;;;;;;;;;;;;;103:28;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity >=0.4.21 <0.7.0;\n\nimport \"./wesCoin.sol\";\n\ncontract wesCoinSale {\n   address admin;\n   wesCoin public tokenContract;\n\n\n   constructor (wesCoin _tokenContract) public {\n      admin = msg.sender;\n      tokenContract = _tokenContract;\n\n   }\n}\n",
+  "sourcePath": "/Users/daleross18/wesCoin/token_sale/contracts/wesCoinSale.sol",
+  "ast": {
+    "absolutePath": "/Users/daleross18/wesCoin/token_sale/contracts/wesCoinSale.sol",
+    "exportedSymbols": {
+      "wesCoinSale": [
+        248
+      ]
+    },
+    "id": 249,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 227,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".21",
+          "<",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:2"
+      },
+      {
+        "absolutePath": "/Users/daleross18/wesCoin/token_sale/contracts/wesCoin.sol",
+        "file": "./wesCoin.sol",
+        "id": 228,
+        "nodeType": "ImportDirective",
+        "scope": 249,
+        "sourceUnit": 226,
+        "src": "34:23:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 248,
+        "linearizedBaseContracts": [
+          248
+        ],
+        "name": "wesCoinSale",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 230,
+            "name": "admin",
+            "nodeType": "VariableDeclaration",
+            "scope": 248,
+            "src": "85:13:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 229,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "85:7:2",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 232,
+            "name": "tokenContract",
+            "nodeType": "VariableDeclaration",
+            "scope": 248,
+            "src": "103:28:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_wesCoin_$225",
+              "typeString": "contract wesCoin"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 231,
+              "name": "wesCoin",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 225,
+              "src": "103:7:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_wesCoin_$225",
+                "typeString": "contract wesCoin"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 246,
+              "nodeType": "Block",
+              "src": "182:71:2",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 240,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 237,
+                      "name": "admin",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 230,
+                      "src": "190:5:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 238,
+                        "name": "msg",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 263,
+                        "src": "198:3:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_message",
+                          "typeString": "msg"
+                        }
+                      },
+                      "id": 239,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "sender",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "198:10:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    },
+                    "src": "190:18:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 241,
+                  "nodeType": "ExpressionStatement",
+                  "src": "190:18:2"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 244,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 242,
+                      "name": "tokenContract",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 232,
+                      "src": "216:13:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_wesCoin_$225",
+                        "typeString": "contract wesCoin"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 243,
+                      "name": "_tokenContract",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 234,
+                      "src": "232:14:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_wesCoin_$225",
+                        "typeString": "contract wesCoin"
+                      }
+                    },
+                    "src": "216:30:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_wesCoin_$225",
+                      "typeString": "contract wesCoin"
+                    }
+                  },
+                  "id": 245,
+                  "nodeType": "ExpressionStatement",
+                  "src": "216:30:2"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 247,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 235,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 234,
+                  "name": "_tokenContract",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 247,
+                  "src": "151:22:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_wesCoin_$225",
+                    "typeString": "contract wesCoin"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 233,
+                    "name": "wesCoin",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 225,
+                    "src": "151:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_wesCoin_$225",
+                      "typeString": "contract wesCoin"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "150:24:2"
+            },
+            "returnParameters": {
+              "id": 236,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "182:0:2"
+            },
+            "scope": 248,
+            "src": "138:115:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 249,
+        "src": "59:196:2"
+      }
+    ],
+    "src": "0:256:2"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/daleross18/wesCoin/token_sale/contracts/wesCoinSale.sol",
+    "exportedSymbols": {
+      "wesCoinSale": [
+        248
+      ]
+    },
+    "id": 249,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 227,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".21",
+          "<",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:2"
+      },
+      {
+        "absolutePath": "/Users/daleross18/wesCoin/token_sale/contracts/wesCoin.sol",
+        "file": "./wesCoin.sol",
+        "id": 228,
+        "nodeType": "ImportDirective",
+        "scope": 249,
+        "sourceUnit": 226,
+        "src": "34:23:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 248,
+        "linearizedBaseContracts": [
+          248
+        ],
+        "name": "wesCoinSale",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 230,
+            "name": "admin",
+            "nodeType": "VariableDeclaration",
+            "scope": 248,
+            "src": "85:13:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 229,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "85:7:2",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 232,
+            "name": "tokenContract",
+            "nodeType": "VariableDeclaration",
+            "scope": 248,
+            "src": "103:28:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_wesCoin_$225",
+              "typeString": "contract wesCoin"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 231,
+              "name": "wesCoin",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 225,
+              "src": "103:7:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_wesCoin_$225",
+                "typeString": "contract wesCoin"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 246,
+              "nodeType": "Block",
+              "src": "182:71:2",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 240,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 237,
+                      "name": "admin",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 230,
+                      "src": "190:5:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 238,
+                        "name": "msg",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 263,
+                        "src": "198:3:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_message",
+                          "typeString": "msg"
+                        }
+                      },
+                      "id": 239,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "sender",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "198:10:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    },
+                    "src": "190:18:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 241,
+                  "nodeType": "ExpressionStatement",
+                  "src": "190:18:2"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 244,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 242,
+                      "name": "tokenContract",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 232,
+                      "src": "216:13:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_wesCoin_$225",
+                        "typeString": "contract wesCoin"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 243,
+                      "name": "_tokenContract",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 234,
+                      "src": "232:14:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_wesCoin_$225",
+                        "typeString": "contract wesCoin"
+                      }
+                    },
+                    "src": "216:30:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_wesCoin_$225",
+                      "typeString": "contract wesCoin"
+                    }
+                  },
+                  "id": 245,
+                  "nodeType": "ExpressionStatement",
+                  "src": "216:30:2"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 247,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 235,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 234,
+                  "name": "_tokenContract",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 247,
+                  "src": "151:22:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_wesCoin_$225",
+                    "typeString": "contract wesCoin"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 233,
+                    "name": "wesCoin",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 225,
+                    "src": "151:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_wesCoin_$225",
+                      "typeString": "contract wesCoin"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "150:24:2"
+            },
+            "returnParameters": {
+              "id": 236,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "182:0:2"
+            },
+            "scope": 248,
+            "src": "138:115:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 249,
+        "src": "59:196:2"
+      }
+    ],
+    "src": "0:256:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
+  },
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x4B4763BbFF03fd5Ae604F4b55EaC954A37D350F4",
+      "transactionHash": "0xb961fe73262fed12dcc158ec5e27b13e46c2e9688c84a30dde07393453b6a8ad"
+    }
+  },
+  "schemaVersion": "3.2.0",
+  "updatedAt": "2020-06-25T17:13:31.287Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
