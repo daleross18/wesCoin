@@ -1,8 +1,13 @@
+var wesCoin = artifacts.require("./wesCoin.sol");
 var wesCoinSale = artifacts.require("./wesCoinSale.sol");
 
+
 contract('wesCoinSale', function(accounts) {
+   var tokenInstance;
    var tokenSaleInstance;
+   var buyer = accounts[1];
    var tokenPrice = 1000000000000000; //in wei
+   var numberOfTokens;
 
    it('initializes the contract with the correct values', function() {
       return wesCoinSale.deployed().then(function(instance) {
@@ -18,4 +23,30 @@ contract('wesCoinSale', function(accounts) {
          assert.equal(price, tokenPrice, 'token price is correct');
       });
    });
+
+   it ('facilitates token buying', function() {
+      return wesCoin.deployed().then(function(instance) {
+         //Grab token instance first
+         tokenInstance = instance;
+         wesCoinSale.deployed();
+      }).then(function(instance) {
+         // Then grab token sale instance
+         tokenSaleInstance = instance;
+         //Provision some tokens
+         numberOfTokens = 10;
+         return tokenSaleInstance.buyTokens(numberOfTokens, { from: buyer, value: numberOfTokens * tokenPrice})
+      }).then(function(receipt) {
+         assert.equal(receipt.logs.length, 1, 'triggers one event');
+         assert.equal(receipt.logs[0].event, 'Sell', 'should be the "Sell" event');
+         assert.equal(receipt.logs[0].args._buyer, buyer, 'logs the account that purchased the tokens');
+         assert.equal(receipt.logs[0].args._amount, numberOfTokens, 'logs the number of tokens purchased');
+         return tokenSaleInstance.tokensSold();
+      }).then(function(amount) {
+         assert.equal(amount.toNumber(), numberOfTokens, 'increments the number of tokens sold');
+         return tokenSaleInstance.buyTokens(numberOfTokens, { from: buyer, value: 1 });
+      }).then(assert.fail).catch(function(error) {
+         assert(error.message, 'msg.value must equal amount of tokens in wei');
+      });
+   });
+
 });

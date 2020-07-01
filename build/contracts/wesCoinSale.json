@@ -7,11 +7,35 @@
           "internalType": "contract wesCoin",
           "name": "_tokenContract",
           "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_tokenPrice",
+          "type": "uint256"
         }
       ],
       "payable": false,
       "stateMutability": "nonpayable",
       "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_buyer",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "Sell",
+      "type": "event"
     },
     {
       "constant": true,
@@ -27,23 +51,68 @@
       "payable": false,
       "stateMutability": "view",
       "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "tokenPrice",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "tokensSold",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_numberOfTokens",
+          "type": "uint256"
+        }
+      ],
+      "name": "buyTokens",
+      "outputs": [],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract wesCoin\",\"name\":\"_tokenContract\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"constant\":true,\"inputs\":[],\"name\":\"tokenContract\",\"outputs\":[{\"internalType\":\"contract wesCoin\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/daleross18/wesCoin/token_sale/contracts/wesCoinSale.sol\":\"wesCoinSale\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/daleross18/wesCoin/token_sale/contracts/wesCoin.sol\":{\"keccak256\":\"0x50b0ee5bde355f450fc7a5de81ddae609c3555204716f20d21311161c725aa89\",\"urls\":[\"bzz-raw://284bb004dbc7e825b16052c9c0209c6f3f18be96b09afd35bf785d1c1a183ea0\",\"dweb:/ipfs/QmZHz2d2ZNwatxbRqEsL4PE5j9w6tpX85859sqSCqsEJg9\"]},\"/Users/daleross18/wesCoin/token_sale/contracts/wesCoinSale.sol\":{\"keccak256\":\"0x7fdb21c45f2f061633af4407e4aa349585c8cf772c43542dcf14ef38595f64d2\",\"urls\":[\"bzz-raw://9cb19c0312858227cb3bf7fadee7db7923110d057e8db4fe0c4fbb4010307023\",\"dweb:/ipfs/QmfBMfpnDCRw1HJHjwUhYUeCneqcRceZ5FiV5rYYWS9MFa\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b506040516101a43803806101a48339818101604052602081101561003357600080fd5b8101908080519060200190929190505050336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555080600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505060d0806100d46000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c806355a373d614602d575b600080fd5b60336075565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff168156fea265627a7a7231582028e46ce3590dd34836370041c22cf636f147ae2550868347026644dfc783950c64736f6c63430005100032",
-  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060285760003560e01c806355a373d614602d575b600080fd5b60336075565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff168156fea265627a7a7231582028e46ce3590dd34836370041c22cf636f147ae2550868347026644dfc783950c64736f6c63430005100032",
-  "sourceMap": "59:196:2:-;;;138:115;8:9:-1;5:2;;;30:1;27;20:12;5:2;138:115:2;;;;;;;;;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;138:115:2;;;;;;;;;;;;;;;;198:10;190:5;;:18;;;;;;;;;;;;;;;;;;232:14;216:13;;:30;;;;;;;;;;;;;;;;;;138:115;59:196;;;;;;",
-  "deployedSourceMap": "59:196:2:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;59:196:2;;;;;;;;;;;;;;;;;;;103:28;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
-  "source": "pragma solidity >=0.4.21 <0.7.0;\n\nimport \"./wesCoin.sol\";\n\ncontract wesCoinSale {\n   address admin;\n   wesCoin public tokenContract;\n\n\n   constructor (wesCoin _tokenContract) public {\n      admin = msg.sender;\n      tokenContract = _tokenContract;\n\n   }\n}\n",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract wesCoin\",\"name\":\"_tokenContract\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_tokenPrice\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_buyer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"Sell\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_numberOfTokens\",\"type\":\"uint256\"}],\"name\":\"buyTokens\",\"outputs\":[],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"tokenContract\",\"outputs\":[{\"internalType\":\"contract wesCoin\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"tokenPrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"tokensSold\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/daleross18/wesCoin/token_sale/contracts/wesCoinSale.sol\":\"wesCoinSale\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/daleross18/wesCoin/token_sale/contracts/wesCoin.sol\":{\"keccak256\":\"0x50b0ee5bde355f450fc7a5de81ddae609c3555204716f20d21311161c725aa89\",\"urls\":[\"bzz-raw://284bb004dbc7e825b16052c9c0209c6f3f18be96b09afd35bf785d1c1a183ea0\",\"dweb:/ipfs/QmZHz2d2ZNwatxbRqEsL4PE5j9w6tpX85859sqSCqsEJg9\"]},\"/Users/daleross18/wesCoin/token_sale/contracts/wesCoinSale.sol\":{\"keccak256\":\"0x7af3b1c074ce5da1890455b80435b0dce16cfeebbd39e48afb83c64564b30aa7\",\"urls\":[\"bzz-raw://d5a9c4104e95cb7ebc1ad7daeba05057b314753b59507cf2b85be8e29dae863c\",\"dweb:/ipfs/QmdvL7wuDCBMFaZrBzckH3XZw7wDkCTkBD82ggAA4uJjrD\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506040516102eb3803806102eb8339818101604052604081101561003357600080fd5b810190808051906020019092919080519060200190929190505050336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555081600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550806002819055505050610204806100e76000396000f3fe60806040526004361061003f5760003560e01c80633610724e14610044578063518ab2a81461007257806355a373d61461009d5780637ff9b596146100f4575b600080fd5b6100706004803603602081101561005a57600080fd5b810190808035906020019092919050505061011f565b005b34801561007e57600080fd5b5061008761019d565b6040518082815260200191505060405180910390f35b3480156100a957600080fd5b506100b26101a3565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34801561010057600080fd5b506101096101c9565b6040518082815260200191505060405180910390f35b806003600082825401925050819055507f5e5e995ce3133561afceaa51a9a154d5db228cd7525d34df5185582c18d3df093382604051808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018281526020019250505060405180910390a150565b60035481565b600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6002548156fea265627a7a7231582027775c61240204488456ec56e76d73675f6177abd58190b6a98aabf6e1f25a4b64736f6c63430005100032",
+  "deployedBytecode": "0x60806040526004361061003f5760003560e01c80633610724e14610044578063518ab2a81461007257806355a373d61461009d5780637ff9b596146100f4575b600080fd5b6100706004803603602081101561005a57600080fd5b810190808035906020019092919050505061011f565b005b34801561007e57600080fd5b5061008761019d565b6040518082815260200191505060405180910390f35b3480156100a957600080fd5b506100b26101a3565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34801561010057600080fd5b506101096101c9565b6040518082815260200191505060405180910390f35b806003600082825401925050819055507f5e5e995ce3133561afceaa51a9a154d5db228cd7525d34df5185582c18d3df093382604051808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018281526020019250505060405180910390a150565b60035481565b600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6002548156fea265627a7a7231582027775c61240204488456ec56e76d73675f6177abd58190b6a98aabf6e1f25a4b64736f6c63430005100032",
+  "sourceMap": "59:532:2:-;;;266:167;8:9:-1;5:2;;;30:1;27;20:12;5:2;266:167:2;;;;;;;;;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;266:167:2;;;;;;;;;;;;;;;;;;;;;;;;;347:10;339:5;;:18;;;;;;;;;;;;;;;;;;381:14;365:13;;:30;;;;;;;;;;;;;;;;;;416:11;403:10;:24;;;;266:167;;59:532;;;;;;",
+  "deployedSourceMap": "59:532:2:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;438:151;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;438:151:2;;;;;;;;;;;;;;;;;:::i;:::-;;166:25;;8:9:-1;5:2;;;30:1;27;20:12;5:2;166:25:2;;;:::i;:::-;;;;;;;;;;;;;;;;;;;103:28;;8:9:-1;5:2;;;30:1;27;20:12;5:2;103:28:2;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;136:25;;8:9:-1;5:2;;;30:1;27;20:12;5:2;136:25:2;;;:::i;:::-;;;;;;;;;;;;;;;;;;;438:151;520:15;506:10;;:29;;;;;;;;;;;549:33;554:10;566:15;549:33;;;;;;;;;;;;;;;;;;;;;;;;;;;;438:151;:::o;166:25::-;;;;:::o;103:28::-;;;;;;;;;;;;;:::o;136:25::-;;;;:::o",
+  "source": "pragma solidity >=0.4.21 <0.7.0;\n\nimport \"./wesCoin.sol\";\n\ncontract wesCoinSale {\n   address admin;\n   wesCoin public tokenContract;\n   uint256 public tokenPrice;\n   uint256 public tokensSold;\n\n   event Sell(\n      address _buyer,\n      uint256 _amount\n      );\n\n   constructor (wesCoin _tokenContract, uint256 _tokenPrice) public {\n      admin = msg.sender;\n      tokenContract = _tokenContract;\n      tokenPrice = _tokenPrice;\n   }\n\n   function buyTokens(uint256 _numberOfTokens) public payable {\n\n      tokensSold += _numberOfTokens;\n\n      emit Sell(msg.sender, _numberOfTokens);\n\n   }\n}\n",
   "sourcePath": "/Users/daleross18/wesCoin/token_sale/contracts/wesCoinSale.sol",
   "ast": {
     "absolutePath": "/Users/daleross18/wesCoin/token_sale/contracts/wesCoinSale.sol",
     "exportedSymbols": {
       "wesCoinSale": [
-        248
+        280
       ]
     },
-    "id": 249,
+    "id": 281,
     "nodeType": "SourceUnit",
     "nodes": [
       {
@@ -65,7 +134,7 @@
         "file": "./wesCoin.sol",
         "id": 228,
         "nodeType": "ImportDirective",
-        "scope": 249,
+        "scope": 281,
         "sourceUnit": 226,
         "src": "34:23:2",
         "symbolAliases": [],
@@ -77,9 +146,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 248,
+        "id": 280,
         "linearizedBaseContracts": [
-          248
+          280
         ],
         "name": "wesCoinSale",
         "nodeType": "ContractDefinition",
@@ -89,7 +158,7 @@
             "id": 230,
             "name": "admin",
             "nodeType": "VariableDeclaration",
-            "scope": 248,
+            "scope": 280,
             "src": "85:13:2",
             "stateVariable": true,
             "storageLocation": "default",
@@ -116,7 +185,7 @@
             "id": 232,
             "name": "tokenContract",
             "nodeType": "VariableDeclaration",
-            "scope": 248,
+            "scope": 280,
             "src": "103:28:2",
             "stateVariable": true,
             "storageLocation": "default",
@@ -140,27 +209,149 @@
             "visibility": "public"
           },
           {
+            "constant": false,
+            "id": 234,
+            "name": "tokenPrice",
+            "nodeType": "VariableDeclaration",
+            "scope": 280,
+            "src": "136:25:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 233,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "136:7:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 236,
+            "name": "tokensSold",
+            "nodeType": "VariableDeclaration",
+            "scope": 280,
+            "src": "166:25:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 235,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "166:7:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 242,
+            "name": "Sell",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 241,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 238,
+                  "indexed": false,
+                  "name": "_buyer",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 242,
+                  "src": "215:14:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 237,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "215:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 240,
+                  "indexed": false,
+                  "name": "_amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 242,
+                  "src": "237:15:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 239,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "237:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "207:53:2"
+            },
+            "src": "197:64:2"
+          },
+          {
             "body": {
-              "id": 246,
+              "id": 262,
               "nodeType": "Block",
-              "src": "182:71:2",
+              "src": "331:102:2",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 240,
+                    "id": 252,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 237,
+                      "id": 249,
                       "name": "admin",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 230,
-                      "src": "190:5:2",
+                      "src": "339:5:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
@@ -172,18 +363,18 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 238,
+                        "id": 250,
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 263,
-                        "src": "198:3:2",
+                        "referencedDeclaration": 295,
+                        "src": "347:3:2",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
                           "typeString": "msg"
                         }
                       },
-                      "id": 239,
+                      "id": 251,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -191,38 +382,38 @@
                       "memberName": "sender",
                       "nodeType": "MemberAccess",
                       "referencedDeclaration": null,
-                      "src": "198:10:2",
+                      "src": "347:10:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address_payable",
                         "typeString": "address payable"
                       }
                     },
-                    "src": "190:18:2",
+                    "src": "339:18:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "id": 241,
+                  "id": 253,
                   "nodeType": "ExpressionStatement",
-                  "src": "190:18:2"
+                  "src": "339:18:2"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 244,
+                    "id": 256,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 242,
+                      "id": 254,
                       "name": "tokenContract",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 232,
-                      "src": "216:13:2",
+                      "src": "365:13:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_contract$_wesCoin_$225",
                         "typeString": "contract wesCoin"
@@ -232,47 +423,93 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 243,
+                      "id": 255,
                       "name": "_tokenContract",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 234,
-                      "src": "232:14:2",
+                      "referencedDeclaration": 244,
+                      "src": "381:14:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_contract$_wesCoin_$225",
                         "typeString": "contract wesCoin"
                       }
                     },
-                    "src": "216:30:2",
+                    "src": "365:30:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_contract$_wesCoin_$225",
                       "typeString": "contract wesCoin"
                     }
                   },
-                  "id": 245,
+                  "id": 257,
                   "nodeType": "ExpressionStatement",
-                  "src": "216:30:2"
+                  "src": "365:30:2"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 260,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 258,
+                      "name": "tokenPrice",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 234,
+                      "src": "403:10:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 259,
+                      "name": "_tokenPrice",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 246,
+                      "src": "416:11:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "403:24:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 261,
+                  "nodeType": "ExpressionStatement",
+                  "src": "403:24:2"
                 }
               ]
             },
             "documentation": null,
-            "id": 247,
+            "id": 263,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 235,
+              "id": 247,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 234,
+                  "id": 244,
                   "name": "_tokenContract",
                   "nodeType": "VariableDeclaration",
-                  "scope": 247,
-                  "src": "151:22:2",
+                  "scope": 263,
+                  "src": "279:22:2",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -281,11 +518,11 @@
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 233,
+                    "id": 243,
                     "name": "wesCoin",
                     "nodeType": "UserDefinedTypeName",
                     "referencedDeclaration": 225,
-                    "src": "151:7:2",
+                    "src": "279:7:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_contract$_wesCoin_$225",
                       "typeString": "contract wesCoin"
@@ -293,37 +530,256 @@
                   },
                   "value": null,
                   "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 246,
+                  "name": "_tokenPrice",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 263,
+                  "src": "303:19:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 245,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "303:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
                 }
               ],
-              "src": "150:24:2"
+              "src": "278:45:2"
             },
             "returnParameters": {
-              "id": 236,
+              "id": 248,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "182:0:2"
+              "src": "331:0:2"
             },
-            "scope": 248,
-            "src": "138:115:2",
+            "scope": 280,
+            "src": "266:167:2",
             "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 278,
+              "nodeType": "Block",
+              "src": "497:92:2",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 270,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 268,
+                      "name": "tokensSold",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 236,
+                      "src": "506:10:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "+=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 269,
+                      "name": "_numberOfTokens",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 265,
+                      "src": "520:15:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "506:29:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 271,
+                  "nodeType": "ExpressionStatement",
+                  "src": "506:29:2"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 273,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 295,
+                          "src": "554:3:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 274,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "554:10:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 275,
+                        "name": "_numberOfTokens",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 265,
+                        "src": "566:15:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 272,
+                      "name": "Sell",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 242,
+                      "src": "549:4:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_uint256_$returns$__$",
+                        "typeString": "function (address,uint256)"
+                      }
+                    },
+                    "id": 276,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "549:33:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 277,
+                  "nodeType": "EmitStatement",
+                  "src": "544:38:2"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 279,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "buyTokens",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 266,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 265,
+                  "name": "_numberOfTokens",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 279,
+                  "src": "457:23:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 264,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "457:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "456:25:2"
+            },
+            "returnParameters": {
+              "id": 267,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "497:0:2"
+            },
+            "scope": 280,
+            "src": "438:151:2",
+            "stateMutability": "payable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 249,
-        "src": "59:196:2"
+        "scope": 281,
+        "src": "59:532:2"
       }
     ],
-    "src": "0:256:2"
+    "src": "0:592:2"
   },
   "legacyAST": {
     "absolutePath": "/Users/daleross18/wesCoin/token_sale/contracts/wesCoinSale.sol",
     "exportedSymbols": {
       "wesCoinSale": [
-        248
+        280
       ]
     },
-    "id": 249,
+    "id": 281,
     "nodeType": "SourceUnit",
     "nodes": [
       {
@@ -345,7 +801,7 @@
         "file": "./wesCoin.sol",
         "id": 228,
         "nodeType": "ImportDirective",
-        "scope": 249,
+        "scope": 281,
         "sourceUnit": 226,
         "src": "34:23:2",
         "symbolAliases": [],
@@ -357,9 +813,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 248,
+        "id": 280,
         "linearizedBaseContracts": [
-          248
+          280
         ],
         "name": "wesCoinSale",
         "nodeType": "ContractDefinition",
@@ -369,7 +825,7 @@
             "id": 230,
             "name": "admin",
             "nodeType": "VariableDeclaration",
-            "scope": 248,
+            "scope": 280,
             "src": "85:13:2",
             "stateVariable": true,
             "storageLocation": "default",
@@ -396,7 +852,7 @@
             "id": 232,
             "name": "tokenContract",
             "nodeType": "VariableDeclaration",
-            "scope": 248,
+            "scope": 280,
             "src": "103:28:2",
             "stateVariable": true,
             "storageLocation": "default",
@@ -420,27 +876,149 @@
             "visibility": "public"
           },
           {
+            "constant": false,
+            "id": 234,
+            "name": "tokenPrice",
+            "nodeType": "VariableDeclaration",
+            "scope": 280,
+            "src": "136:25:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 233,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "136:7:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 236,
+            "name": "tokensSold",
+            "nodeType": "VariableDeclaration",
+            "scope": 280,
+            "src": "166:25:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 235,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "166:7:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 242,
+            "name": "Sell",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 241,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 238,
+                  "indexed": false,
+                  "name": "_buyer",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 242,
+                  "src": "215:14:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 237,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "215:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 240,
+                  "indexed": false,
+                  "name": "_amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 242,
+                  "src": "237:15:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 239,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "237:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "207:53:2"
+            },
+            "src": "197:64:2"
+          },
+          {
             "body": {
-              "id": 246,
+              "id": 262,
               "nodeType": "Block",
-              "src": "182:71:2",
+              "src": "331:102:2",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 240,
+                    "id": 252,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 237,
+                      "id": 249,
                       "name": "admin",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 230,
-                      "src": "190:5:2",
+                      "src": "339:5:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
@@ -452,18 +1030,18 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 238,
+                        "id": 250,
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 263,
-                        "src": "198:3:2",
+                        "referencedDeclaration": 295,
+                        "src": "347:3:2",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
                           "typeString": "msg"
                         }
                       },
-                      "id": 239,
+                      "id": 251,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -471,38 +1049,38 @@
                       "memberName": "sender",
                       "nodeType": "MemberAccess",
                       "referencedDeclaration": null,
-                      "src": "198:10:2",
+                      "src": "347:10:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address_payable",
                         "typeString": "address payable"
                       }
                     },
-                    "src": "190:18:2",
+                    "src": "339:18:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "id": 241,
+                  "id": 253,
                   "nodeType": "ExpressionStatement",
-                  "src": "190:18:2"
+                  "src": "339:18:2"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 244,
+                    "id": 256,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 242,
+                      "id": 254,
                       "name": "tokenContract",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 232,
-                      "src": "216:13:2",
+                      "src": "365:13:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_contract$_wesCoin_$225",
                         "typeString": "contract wesCoin"
@@ -512,47 +1090,93 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 243,
+                      "id": 255,
                       "name": "_tokenContract",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 234,
-                      "src": "232:14:2",
+                      "referencedDeclaration": 244,
+                      "src": "381:14:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_contract$_wesCoin_$225",
                         "typeString": "contract wesCoin"
                       }
                     },
-                    "src": "216:30:2",
+                    "src": "365:30:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_contract$_wesCoin_$225",
                       "typeString": "contract wesCoin"
                     }
                   },
-                  "id": 245,
+                  "id": 257,
                   "nodeType": "ExpressionStatement",
-                  "src": "216:30:2"
+                  "src": "365:30:2"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 260,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 258,
+                      "name": "tokenPrice",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 234,
+                      "src": "403:10:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 259,
+                      "name": "_tokenPrice",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 246,
+                      "src": "416:11:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "403:24:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 261,
+                  "nodeType": "ExpressionStatement",
+                  "src": "403:24:2"
                 }
               ]
             },
             "documentation": null,
-            "id": 247,
+            "id": 263,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 235,
+              "id": 247,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 234,
+                  "id": 244,
                   "name": "_tokenContract",
                   "nodeType": "VariableDeclaration",
-                  "scope": 247,
-                  "src": "151:22:2",
+                  "scope": 263,
+                  "src": "279:22:2",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -561,11 +1185,11 @@
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 233,
+                    "id": 243,
                     "name": "wesCoin",
                     "nodeType": "UserDefinedTypeName",
                     "referencedDeclaration": 225,
-                    "src": "151:7:2",
+                    "src": "279:7:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_contract$_wesCoin_$225",
                       "typeString": "contract wesCoin"
@@ -573,28 +1197,247 @@
                   },
                   "value": null,
                   "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 246,
+                  "name": "_tokenPrice",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 263,
+                  "src": "303:19:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 245,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "303:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
                 }
               ],
-              "src": "150:24:2"
+              "src": "278:45:2"
             },
             "returnParameters": {
-              "id": 236,
+              "id": 248,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "182:0:2"
+              "src": "331:0:2"
             },
-            "scope": 248,
-            "src": "138:115:2",
+            "scope": 280,
+            "src": "266:167:2",
             "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 278,
+              "nodeType": "Block",
+              "src": "497:92:2",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 270,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 268,
+                      "name": "tokensSold",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 236,
+                      "src": "506:10:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "+=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 269,
+                      "name": "_numberOfTokens",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 265,
+                      "src": "520:15:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "506:29:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 271,
+                  "nodeType": "ExpressionStatement",
+                  "src": "506:29:2"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 273,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 295,
+                          "src": "554:3:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 274,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "554:10:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 275,
+                        "name": "_numberOfTokens",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 265,
+                        "src": "566:15:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 272,
+                      "name": "Sell",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 242,
+                      "src": "549:4:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_uint256_$returns$__$",
+                        "typeString": "function (address,uint256)"
+                      }
+                    },
+                    "id": 276,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "549:33:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 277,
+                  "nodeType": "EmitStatement",
+                  "src": "544:38:2"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 279,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "buyTokens",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 266,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 265,
+                  "name": "_numberOfTokens",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 279,
+                  "src": "457:23:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 264,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "457:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "456:25:2"
+            },
+            "returnParameters": {
+              "id": 267,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "497:0:2"
+            },
+            "scope": 280,
+            "src": "438:151:2",
+            "stateMutability": "payable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 249,
-        "src": "59:196:2"
+        "scope": 281,
+        "src": "59:532:2"
       }
     ],
-    "src": "0:256:2"
+    "src": "0:592:2"
   },
   "compiler": {
     "name": "solc",
@@ -602,14 +1445,34 @@
   },
   "networks": {
     "5777": {
-      "events": {},
+      "events": {
+        "0x5e5e995ce3133561afceaa51a9a154d5db228cd7525d34df5185582c18d3df09": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_buyer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "Sell",
+          "type": "event"
+        }
+      },
       "links": {},
-      "address": "0x4B4763BbFF03fd5Ae604F4b55EaC954A37D350F4",
-      "transactionHash": "0xb961fe73262fed12dcc158ec5e27b13e46c2e9688c84a30dde07393453b6a8ad"
+      "address": "0x5DAcF762Ee3d0bF80cACf4F68eeC7a9f29De6C88",
+      "transactionHash": "0xdda3bda59cdacf2eab634dcef98b009ef3542a79f471fdf363ff73527c406f51"
     }
   },
   "schemaVersion": "3.2.0",
-  "updatedAt": "2020-06-25T17:13:31.287Z",
+  "updatedAt": "2020-07-01T15:32:50.702Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
