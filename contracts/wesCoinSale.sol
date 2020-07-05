@@ -46,6 +46,10 @@ contract wesCoinSale {
       require(msg.sender == admin, 'must be admin to end sale');
       require(tokenContract.transfer(admin, tokenContract.balanceOf(address(this))));
 
+
+      admin.transfer(address(this).balance);
+
+
       emit EndSale(tokensSold);
 
    }

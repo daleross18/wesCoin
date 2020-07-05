@@ -55,7 +55,7 @@ contract('wesCoinSale', function(accounts) {
          assert.equal(balance.toNumber(), tokensAvailable - numberOfTokens);
          return tokenSaleInstance.buyTokens(numberOfTokens, { from: buyer, value: 1 });
       }).then(assert.fail).catch(function(error) {
-         assert(error.message, 'msg.value must equal amount of tokens in wei');                  return tokenSaleInstance.buyTokens(numberOfTokens, { from: buyer, value: 1 });
+         assert(error.message, 'msg.value must equal amount of tokens in wei');
          return tokenSaleInstance.buyTokens(800000, { from: buyer, value: numberOfTokens * tokenPrice });
       }).then(assert.fail).catch(function(error) {
          assert(error.message, 'cannot purchase more tokens than available');
@@ -77,7 +77,7 @@ contract('wesCoinSale', function(accounts) {
          return tokenInstance.balanceOf(admin);
       }).then(function(balance) {
          assert.equal(balance.toNumber(), 999990, 'return all unsold wesCoin to admin');
-         return web3.eth.getBalance(tokenSaleInstance.address)
+         return web3.eth.getBalance(tokenSaleInstance.address);
       }).then(function(balance) {
          assert.equal(balance, 0);
       });
