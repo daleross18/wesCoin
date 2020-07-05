@@ -32,7 +32,7 @@ contract('wesCoin', function(accounts) {
    it('transfers token ownership', function (){
       return wesCoin.deployed().then(function(instance){
          tokenInstance = instance;
-         return tokenInstance.transfer.call(accounts[1], 9999999999999999);
+         return tokenInstance.transfer.call(accounts[1], 99999999999999999999999);
       }).then(assert.fail).catch(function(error){
          assert(error.message, 'error message must contain revert');
          return tokenInstance.transfer.call(accounts[1], 250000, {from: accounts[0]});
