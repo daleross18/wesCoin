@@ -1,0 +1,17 @@
+{
+   "name": "wesCoin-Sale",
+   "version": "1.0.0",
+   "description": "wesCoin Sale ICO",
+   "main": "truffle.js",
+   "directories": {
+      "test": "test"
+   },
+   "scripts": {
+      "dev": "lite-server"
+   },
+   "author": "Dale Ross and Henry Carter",
+   "license": "ISC",
+   "devDependencies": {
+      "lite-server": "^2.5.4"
+   }
+}
