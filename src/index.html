@@ -16,6 +16,9 @@
                   <hr />
                   <br />
                </div>
+               <div id="loader">
+                  <p class="text-center">Loading...</p>
+               </div>
                <div id="content" class="text-center">
                   <p>
                      Introducing "wesCoin" (WES)
@@ -23,7 +26,7 @@
                      <span class="dapp-balance"></span>&nbsp;wesCoin
                   </p>
                   <br/>
-                  <form role="form">
+                  <form onSubmit="App.buyTokens(); return false;" role="form">
                      <div class="form-group">
                         <div class="input group">
                            <!--to allow fractional buying, change pattern and min 5:23:30 -->
@@ -41,10 +44,12 @@
                   </div>
                </div>
                <p><span class="tokens-sold"></span> / <span class="tokens-available"></span> tokens sold</p>
+               <hr>
+               <p id="accountAddress"></p>
             </div>
          </div>
          <!-- jQuery (necessary for Bootstrap's javascript plugins) -->
-         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
          <script src="js/bootstrap.min.js"> </script>
          <script src="js/web3.min.js"> </script>
          <script src="js/truffle-contract.min.js"> </script>
